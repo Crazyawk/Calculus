@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Login</title>
+    <script type="module">
+        import { handleGoogleLogin } from './firebase-login.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginButton = document.getElementById("googleLoginBtn");
+
+            loginButton.addEventListener("click", async () => {
+                try {
+                    await handleGoogleLogin();
+
+                    // Generate a validation token
+                    const validationToken = "valid";
+
+                    // Store the token in localStorage
+                    localStorage.setItem("authToken", validationToken);
+
+                    // Redirect to home.html with the token
+                    window.location.href = "home.html?auth=" + validationToken;
+                } catch (error) {
+                    console.error("Login failed:", error);
+                    alert("Login failed. Please try again.");
+                }
+            });
+        });
+    </script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        #googleLoginBtn {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            color: white;
+            background-color: #4285F4;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #googleLoginBtn:hover {
+            background-color: #357ae8;
+        }
+    </style>
+</head>
+<body>
+    <button id="googleLoginBtn">Login with Google</button>
+</body>
+</html>

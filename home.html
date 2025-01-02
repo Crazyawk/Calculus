@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homescreen</title>
+    <script type="module">
+        import { auth } from './firebase-login.js';
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+
+        // Check authentication state
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                // Redirect to login page if no user is logged in
+                window.location.href = "index.html";
+            }
+        });
+    </script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('background.png') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+
+        .option {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .option:hover,
+        .option:active {
+            transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .option img {
+            width: 200px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .option span {
+            display: block;
+            margin-top: 10px;
+            font-size: 1.2rem;
+            color: #fff;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .option img {
+                width: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="option">
+            <a href="poly/apps/polytrack.html">
+                <img src="polytrack.png" alt="Polytrack">
+                <span>Polytrack</span>
+            </a>
+        </div>
+        <div class="option">
+            <a href="slowroads/slowroads.html">
+                <img src="slowroads.png" alt="Slow Roads">
+                <span>Slow Roads</span>
+            </a>
+        </div>
+        <div class="option">
+            <a href="retrobowl-main/index.html">
+                <img src="retrobowl.png" alt="Retro Bowl">
+                <span>Retro Bowl</span>
+            </a>
+        </div>
+        <div class="option">
+            <a href="eagler.html">
+                <img src="minecraft.png" alt="Minecraft">
+                <span>Minecraft</span>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
