@@ -2,22 +2,6 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <script>
-            // Function to get query parameters from the URL
-            function getQueryParam(param) {
-                const urlParams = new URLSearchParams(window.location.search);
-                return urlParams.get(param);
-            }
-        
-            // Validate the auth token from the query parameter
-            const authToken = getQueryParam("auth");
-        
-            // Check if the auth token matches the expected value
-            if (authToken !== "valid" || !localStorage.getItem("authToken")) {
-                // Redirect to the login page if the token is invalid or missing
-                window.location.href = "/index.html";
-            }
-        </script>        
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta http-equiv="X-Frame-Options" content="DENY">
         <meta http-equiv="pragma" content="no-cache"/>
