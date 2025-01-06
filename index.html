@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login with Google</title>
+  <script type="module" src="firebaseConfig.js"></script>
+</head>
+<body>
+  <h1>Login with Google</h1>
+  <button id="googleLogin">Sign in with Google</button>
+
+  <script type="module">
+    import { auth, provider, signInWithPopup } from './firebaseConfig.js';
+
+    document.getElementById('googleLogin').addEventListener('click', () => {
+      signInWithPopup(auth, provider)
+        .then(() => {
+          // Redirect to the game options page
+          window.location.href = '/game-options.html';
+        })
+        .catch((error) => {
+          console.error('Login failed:', error);
+        });
+    });
+  </script>
+</body>
+</html>
