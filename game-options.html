@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Options</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+      margin: 0;
+      background: url('background.png') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 40px;
+      opacity: 0;
+      transform: translateY(50px);
+      animation: fadeInUp 1s forwards;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    li {
+      display: inline-block;
+      margin: 20px;
+      padding: 20px;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      background-color: rgba(0, 0, 0, 0.5);
+      width: 200px;
+      opacity: 0;
+      transform: translateY(50px);
+      animation: fadeInUp 1s forwards;
+      animation-delay: 0.5s;
+      text-align: center;
+    }
+
+    li:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    li img {
+      width: 100px;
+      height: auto;
+      margin-bottom: 10px;
+    }
+
+    a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+
+    /* Keyframe for fade-in and slide-up effect */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1 id="greeting">Hi, what game are we thinking today?</h1>
+  <ul>
+    <li>
+      <img src="eagler.png" alt="Eagler Game">
+      <a href="/eagler.html">Eagler</a>
+    </li>
+    <li>
+      <img src="retro.png" alt="Retro Bowl Game">
+      <a href="/retrowbowl-main/index.html">Retro Bowl</a>
+    </li>
+    <li>
+      <img src="slowroads.png" alt="Slow Roads Game">
+      <a href="/slowroads/slowroads.html">Slow Roads</a>
+    </li>
+    <li>
+      <img src="poly.png" alt="Polytrack Game">
+      <a href="/poly/polytrack.html">Polytrack</a>
+    </li>
+  </ul>
+
+  <script type="module">
+    import { auth } from './firebaseConfig.js';
+    import { onAuthStateChanged } from 'firebase/auth';
+
+    // Get the current user's name and display it
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const greeting = document.getElementById('greeting');
+        greeting.textContent = `Hi, ${user.displayName}! What game are we thinking today?`;
+      } else {
+        console.warn('No user is signed in.');
+      }
+    });
+
+    // Delay fade-in for game options
+    const items = document.querySelectorAll('li');
+    items.forEach((item, index) => {
+      item.style.animationDelay = `${index * 0.2}s`;
+    });
+  </script>
+</body>
+</html>
