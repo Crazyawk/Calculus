@@ -99,20 +99,7 @@
     </li>
   </ul>
 
-  <script type="module">
-    import { auth } from './firebaseConfig.js';
-    import { onAuthStateChanged } from 'firebase/auth';
-
-    // Get the current user's name and display it
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const greeting = document.getElementById('greeting');
-        greeting.textContent = `Hi, ${user.displayName}! What game are we thinking today?`;
-      } else {
-        console.warn('No user is signed in.');
-      }
-    });
-
+  <script>
     // Delay fade-in for game options
     const items = document.querySelectorAll('li');
     items.forEach((item, index) => {
