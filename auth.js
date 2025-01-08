@@ -1,5 +1,5 @@
 import { auth, db } from './firebase-config.js';
-import { GoogleAuthProvider, signInWithRedirect, getRedirectResult } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+import { GoogleAuthProvider, signInWithRedirect, getRedirectResult, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 import { doc, getDoc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
 
 const provider = new GoogleAuthProvider();
@@ -24,7 +24,7 @@ getRedirectResult(auth).then(async (result) => {
       // First-time user
       termsModal.style.display = 'block';
     } else {
-      // Redirect to game-options.html if user exists
+      // Redirect to game-options.html if user already exists
       window.location.href = 'game-options.html';
     }
   }
@@ -52,5 +52,17 @@ saveUsernameBtn.addEventListener('click', async () => {
     window.location.href = 'game-options.html'; // Redirect after saving username
   } else {
     alert('Please enter a valid username.');
+  }
+});
+
+// Persistent session check
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // User is already logged in
+    getDoc(doc(db, 'users', user.uid)).then((userDoc) => {
+      if (userDoc.exists()) {
+        window.location.href = 'game-options.html'; // Redirect to game options
+      }
+    });
   }
 });
