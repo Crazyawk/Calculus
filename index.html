@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Hub Login</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="auth.js" defer></script>
+</head>
+<body>
+  <h1>Welcome to the Game Hub</h1>
+  <button id="login-btn">Login with Google</button>
+
+  <div class="modal" id="terms-modal">
+    <h2>Terms of Service</h2>
+    <p>Please review and accept our <a href="terms.html" target="_blank">Terms of Service</a> to continue.</p>
+    <button id="accept-terms">Accept and Continue</button>
+  </div>
+
+  <div class="modal" id="username-modal">
+    <h2>Create a Username</h2>
+    <input type="text" id="username" placeholder="Enter your username">
+    <button id="save-username">Save Username</button>
+  </div>
+</body>
+</html>
