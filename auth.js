@@ -29,3 +29,4 @@ getRedirectResult(auth)
   .catch((error) => {
     console.error('Error during redirect result:', error);
   });
+*/
