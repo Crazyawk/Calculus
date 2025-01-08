@@ -19,7 +19,7 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-// Handle redirect result (optional for debugging)
+/* Handle redirect result (optional for debugging)
 getRedirectResult(auth)
   .then((result) => {
     if (result.user) {
