@@ -13,7 +13,7 @@ loginBtn.addEventListener('click', () => {
 onAuthStateChanged(auth, (user) => {
   if (user) {
     console.log('User is logged in:', user);
-    window.location.href = 'game-options.html';
+    window.location.href = /game-options.html;
   } else {
     console.log('No user is logged in.');
   }
