@@ -17,4 +17,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+// Explicitly set the redirect domain for GitHub Pages
+auth.useDeviceLanguage(); // Optional, sets the auth UI language to the browser's language
+
 export { auth, db };
