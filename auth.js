@@ -14,19 +14,19 @@ loginBtn.addEventListener('click', () => {
 onAuthStateChanged(auth, (user) => {
   if (user) {
     console.log('User is logged in:', user);
-    window.location.href = 'game-options.html'; // Redirect to game options
+    window.location.href = 'game-options.html';
   } else {
     console.log('No user is logged in.');
   }
 });
 
-// Handle redirect result for debugging
+// Handle redirect result
 getRedirectResult(auth)
   .then((result) => {
-    if (result.user) {
+    if (result && result.user) {
       console.log('Redirect result successful:', result.user);
     } else {
-      console.log('No user returned in redirect result.');
+      console.log('No user in redirect result.');
     }
   })
   .catch((error) => {
