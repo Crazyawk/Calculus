@@ -4,19 +4,24 @@ import { GoogleAuthProvider, signInWithRedirect, getRedirectResult, onAuthStateC
 const provider = new GoogleAuthProvider();
 const loginBtn = document.getElementById('login-btn');
 
+// Add logging to track flow
+function log(message) {
+  document.body.innerHTML += `<p style="color: red;">${message}</p>`;
+}
+
 // Handle login button click
 loginBtn.addEventListener('click', () => {
-  console.log('Login button clicked. Redirecting to Google...');
+  log('Login button clicked. Redirecting to Google...');
   signInWithRedirect(auth, provider);
 });
 
 // Handle authentication state changes
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    console.log('User is logged in:', user);
+    log(`User is logged in: ${user.displayName}`);
     window.location.href = 'game-options.html';
   } else {
-    console.log('No user is logged in.');
+    log('No user is logged in.');
   }
 });
 
@@ -24,11 +29,11 @@ onAuthStateChanged(auth, (user) => {
 getRedirectResult(auth)
   .then((result) => {
     if (result && result.user) {
-      console.log('Redirect result successful:', result.user);
+      log(`Redirect result successful: ${result.user.displayName}`);
     } else {
-      console.log('No user in redirect result.');
+      log('No user in redirect result.');
     }
   })
   .catch((error) => {
-    console.error('Error during redirect result:', error.message);
+    log(`Error during redirect result: ${error.message}`);
   });
