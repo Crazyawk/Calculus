@@ -4,11 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
-  <link rel="stylesheet" href="style.css">
-  <script type="module" src="auth.js" defer></script>
+  <script type="module" src="./auth.js" defer></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+    #login-btn {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #debug {
+      margin-top: 20px;
+      padding: 10px;
+      background: #f9f9f9;
+      border: 1px solid #ccc;
+      max-height: 300px;
+      overflow-y: scroll;
+    }
+  </style>
 </head>
 <body>
-  <h1>Welcome</h1>
+  <h1>Login</h1>
   <button id="login-btn">Login with Google</button>
+  <div id="debug"></div>
 </body>
 </html>
