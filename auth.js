@@ -1,35 +1,32 @@
 import { auth } from './firebase-config.js';
-import { GoogleAuthProvider, signInWithRedirect, getRedirectResult, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+import { GoogleAuthProvider, signInWithRedirect, getRedirectResult } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 
+// Setup Google Auth provider
 const provider = new GoogleAuthProvider();
-const loginBtn = document.getElementById('login-btn');
 
-// Add logging to track flow
+// Debug logging function
 function log(message) {
-  document.body.innerHTML += `<p style="color: red;">${message}</p>`;
+  console.log(message);
+  const debugDiv = document.getElementById('debug');
+  if (debugDiv) {
+    debugDiv.innerHTML += `<p>${message}</p>`;
+  }
 }
 
-// Handle login button click
-loginBtn.addEventListener('click', () => {
-  log('Login button clicked. Redirecting to Google...');
-  signInWithRedirect(auth, provider);
-});
-
-// Handle authentication state changes
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    log(`User is logged in: ${user.displayName}`);
-    window.location.href = 'game-options.html';
-  } else {
-    log('No user is logged in.');
-  }
+// Login button click event
+document.getElementById('login-btn').addEventListener('click', () => {
+  log('Login button clicked. Starting redirect...');
+  signInWithRedirect(auth, provider).catch((error) => {
+    log(`Login failed: ${error.message}`);
+  });
 });
 
 // Handle redirect result
 getRedirectResult(auth)
   .then((result) => {
     if (result && result.user) {
-      log(`Redirect result successful: ${result.user.displayName}`);
+      log(`Redirect successful. Logged in as: ${result.user.displayName}`);
+      window.location.href = 'game-options.html';
     } else {
       log('No user in redirect result.');
     }
